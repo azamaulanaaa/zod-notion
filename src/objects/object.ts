@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const ObjectBasSchema = z.object({
+export const ObjectBaseSchema = z.object({
   object: z.string(),
   id: z.string(),
 });

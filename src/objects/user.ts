@@ -1,6 +1,6 @@
 import { z } from "zod";
+import { ObjectBaseSchema } from "@/objects/object.ts";
 
-export const ObjectPartialUserSchema = z.object({
+export const ObjectPartialUserSchema = ObjectBaseSchema.extend({
   object: z.literal("user"),
-  id: z.string(),
 });
