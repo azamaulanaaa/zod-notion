@@ -1,6 +1,6 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
-import { ObjectBaseSchema } from "@/objects/object.ts";
+import { ObjectBaseSchema } from "@/base.ts";
 
 describe("ObjectBaseSchema", () => {
   it("have `object` property", () => {

@@ -1,6 +1,6 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
-import { ObjectPartialUserSchema } from "@/objects/user.ts";
+import { ObjectPartialUserSchema } from "@/user.ts";
 
 describe("ObjectPartialUserSchema", () => {
   it("have `object` property", () => {
