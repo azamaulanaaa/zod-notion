@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Deno
-        uses: denoland/setup-deno@v2  # Updated to v2 for Deno 2.x compatibility
+        uses: denoland/setup-deno@v2 # Updated to v2 for Deno 2.x compatibility
         with:
           deno-version: v2.x # Specify v2.x or a more specific version like v2.1.0
 
