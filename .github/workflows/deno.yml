@@ -1,0 +1,29 @@
+name: Deno
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2  # Updated to v2 for Deno 2.x compatibility
+        with:
+          deno-version: v2.x # Specify v2.x or a more specific version like v2.1.0
+
+      - name: Run linter
+        run: deno lint
+
+      - name: Run tests
+        run: deno test -A
