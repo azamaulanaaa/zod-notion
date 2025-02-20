@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { ColorBackgroundSchema, ColorSchema } from "@/base.ts";
 
 export const AnnotationSchema = z.object({
   bold: z.boolean(),
@@ -6,27 +7,7 @@ export const AnnotationSchema = z.object({
   strikethrough: z.boolean(),
   underline: z.boolean(),
   code: z.boolean(),
-  color: z.enum([
-    "default",
-    "gray",
-    "brown",
-    "orange",
-    "yellow",
-    "green",
-    "blue",
-    "purple",
-    "pink",
-    "red",
-    "gray_background",
-    "brown_background",
-    "orange_background",
-    "yellow_background",
-    "green_background",
-    "blue_background",
-    "purple_background",
-    "pink_background",
-    "red_background",
-  ]),
+  color: z.union([ColorSchema, ColorBackgroundSchema]),
 });
 
 const BaseRichTextSchema = z.object({
