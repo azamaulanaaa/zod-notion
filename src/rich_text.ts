@@ -44,3 +44,9 @@ export const RichTextTextSchema = BaseRichTextSchema.extend({
     }).nullable(),
   }),
 });
+export const RichTextEquationSchema = BaseRichTextSchema.extend({
+  type: z.literal("equation"),
+  equation: z.object({
+    expression: z.string(),
+  }),
+});

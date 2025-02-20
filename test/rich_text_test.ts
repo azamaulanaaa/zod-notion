@@ -1,6 +1,10 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
-import { AnnotationSchema, RichTextTextSchema } from "@/rich_text.ts";
+import {
+  AnnotationSchema,
+  RichTextEquationSchema,
+  RichTextTextSchema,
+} from "@/rich_text.ts";
 
 describe("AnnotationSchema", () => {
   it("no error on valid examples", () => {
@@ -63,6 +67,33 @@ describe("RichTextTextSchema", () => {
     ];
     for (const example of examples) {
       const error = RichTextTextSchema.safeParse(example).error;
+      expect(error).toBeUndefined();
+    }
+  });
+});
+
+describe("RichTextEquationSchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "type": "equation",
+        "equation": {
+          "expression": "E = mc^2",
+        },
+        "annotations": {
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default",
+        },
+        "plain_text": "E = mc^2",
+        "href": null,
+      },
+    ];
+    for (const example of examples) {
+      const error = RichTextEquationSchema.safeParse(example).error;
       expect(error).toBeUndefined();
     }
   });
