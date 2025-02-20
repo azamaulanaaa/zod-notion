@@ -5,3 +5,4 @@ export * from "@/user.ts";
 export * from "@/parent.ts";
 export * from "@/file.ts";
 export * from "@/emoji.ts";
+export * from "@/rich_text.ts";

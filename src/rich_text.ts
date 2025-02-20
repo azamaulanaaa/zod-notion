@@ -94,3 +94,8 @@ export const RichTextMentionSchema = BaseRichTextSchema.extend({
   type: z.literal("mention"),
   mention: MentionSchema,
 });
+export const RichTextSchema = z.discriminatedUnion("type", [
+  RichTextTextSchema,
+  RichTextEquationSchema,
+  RichTextMentionSchema,
+]);
