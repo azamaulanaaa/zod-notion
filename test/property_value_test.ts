@@ -5,6 +5,7 @@ import {
   PropertyValueCreatedBySchema,
   PropertyValueCreatedTimeSchema,
   PropertyValueDateSchema,
+  PropertyValueEmailSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
 
@@ -79,6 +80,24 @@ describe("PropertyValueDateSchema", () => {
       },
     ];
     const error = PropertyValueDateSchema.array().safeParse(examples).error;
+    expect(error).toBeUndefined();
+  });
+});
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#email
+describe("PropertyValueEmailSchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "email": "ada@makenotion.com",
+      },
+      {
+        "id": "y%5C%5E_",
+        "type": "email",
+        "email": "ada@makenotion.com",
+      },
+    ];
+    const error = PropertyValueEmailSchema.array().safeParse(examples).error;
     expect(error).toBeUndefined();
   });
 });

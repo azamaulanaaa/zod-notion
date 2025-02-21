@@ -32,6 +32,11 @@ export const PropertyValueDateSchema = PropertyValueBaseSchema.extend({
   }),
 });
 
+export const PropertyValueEmailSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("email").optional().default("email"),
+  email: z.string().email(),
+});
+
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
   type: z.literal("title"),
   title: RichTextSchema.array(),
