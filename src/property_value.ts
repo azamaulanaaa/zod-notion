@@ -39,17 +39,17 @@ export const PropertyValueEmailSchema = PropertyValueBaseSchema.extend({
   email: z.string().email(),
 });
 
-const PropertyValueFormulaBaseSchema = PropertyValueBaseSchema.extend({
+const PropertyValueFilesBaseSchema = PropertyValueBaseSchema.extend({
   type: z.literal("files").optional().default("files"),
 });
-export const PropertyValueFilesNotionSchema = PropertyValueFormulaBaseSchema
+export const PropertyValueFilesNotionSchema = PropertyValueFilesBaseSchema
   .extend({
     files: FileNotionSchema.extend({
       name: z.string(),
       type: FileNotionSchema.shape.type.optional().default("file"),
     }).array(),
   });
-export const PropertyValueFilesExternalSchema = PropertyValueFormulaBaseSchema
+export const PropertyValueFilesExternalSchema = PropertyValueFilesBaseSchema
   .extend({
     files: FileExternalSchema.extend({
       name: z.string(),
@@ -59,6 +59,44 @@ export const PropertyValueFilesExternalSchema = PropertyValueFormulaBaseSchema
 export const PropertyValueFilesSchema = z.union([
   PropertyValueFilesNotionSchema,
   PropertyValueFilesExternalSchema,
+]);
+
+const PropertyValueFormulaBaseSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("formula").optional().default("formula"),
+});
+export const PropertyValueFormulaStringSchema = PropertyValueFormulaBaseSchema
+  .extend({
+    formula: z.object({
+      type: z.literal("string"),
+      string: z.string().nullable(),
+    }),
+  });
+export const PropertyValueFormulaDateSchema = PropertyValueFormulaBaseSchema
+  .extend({
+    formula: z.object({
+      type: z.literal("date"),
+      date: PropertyValueDateSchema.nullable(),
+    }),
+  });
+export const PropertyValueFormulaNumberSchema = PropertyValueFormulaBaseSchema
+  .extend({
+    formula: z.object({
+      type: z.literal("number"),
+      number: z.number().nullable(),
+    }),
+  });
+export const PropertyValueFormulaBooleanSchema = PropertyValueFormulaBaseSchema
+  .extend({
+    formula: z.object({
+      type: z.literal("boolean"),
+      boolean: z.boolean().nullable(),
+    }),
+  });
+export const PropertyValueFormulaSchema = z.union([
+  PropertyValueFormulaStringSchema,
+  PropertyValueFormulaDateSchema,
+  PropertyValueFormulaNumberSchema,
+  PropertyValueFormulaBooleanSchema,
 ]);
 
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({

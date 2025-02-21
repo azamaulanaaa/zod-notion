@@ -7,6 +7,7 @@ import {
   PropertyValueDateSchema,
   PropertyValueEmailSchema,
   PropertyValueFilesSchema,
+  PropertyValueFormulaSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
 
@@ -134,6 +135,24 @@ describe("PjopertyValueFilesSchema", () => {
       },
     ];
     const error = PropertyValueFilesSchema.array().safeParse(examples).error;
+    expect(error).toBeUndefined();
+  });
+});
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#formula
+describe("PropertyValueFormulaSchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "id": "CSoE",
+        "type": "formula",
+        "formula": {
+          "type": "number",
+          "number": 56,
+        },
+      },
+    ];
+    const error = PropertyValueFormulaSchema.array().safeParse(examples).error;
     expect(error).toBeUndefined();
   });
 });
