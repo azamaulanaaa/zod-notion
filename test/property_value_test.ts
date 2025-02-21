@@ -1,9 +1,28 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import {
+  PropertyValueCheckboxSchema,
   PropertyValueDateSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#checkbox
+describe("PropertyValueCheckboxSchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "checkbox": true,
+      },
+      {
+        "id": "ZI%40W",
+        "type": "checkbox",
+        "checkbox": true,
+      },
+    ];
+    const error = PropertyValueCheckboxSchema.array().safeParse(examples).error;
+    expect(error).toBeUndefined();
+  });
+});
 
 // NOTE: Reference https://developers.notion.com/reference/page-property-values#title
 describe("PropertyValueTitleSchema", () => {

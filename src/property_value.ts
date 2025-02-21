@@ -3,8 +3,13 @@ import { TimeZoneSchema } from "@/base.ts";
 import { RichTextSchema } from "@/rich_text.ts";
 
 const PropertyValueBaseSchema = z.object({
-  id: z.string(),
+  id: z.string().optional(),
   type: z.string(),
+});
+
+export const PropertyValueCheckboxSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("checkbox").optional().default("checkbox"),
+  checkbox: z.boolean(),
 });
 
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
