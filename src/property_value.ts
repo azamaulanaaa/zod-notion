@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { TimeZoneSchema } from "@/base.ts";
 import { RichTextSchema } from "@/rich_text.ts";
-import { ObjectPartialUserSchema } from "@/user.ts";
+import { ObjectUserSchema } from "@/user.ts";
 import { FileNotionSchema } from "@/file.ts";
 import { FileExternalSchema } from "@/file.ts";
 import { EmojiBasicSchema, EmojiCustomSchema } from "@/emoji.ts";
@@ -18,7 +18,7 @@ export const PropertyValueCheckboxSchema = PropertyValueBaseSchema.extend({
 
 export const PropertyValueCreatedBySchema = PropertyValueBaseSchema.extend({
   type: z.literal("created_by").optional().default("created_by"),
-  created_by: ObjectPartialUserSchema,
+  created_by: ObjectUserSchema,
 });
 
 export const PropertyValueCreatedTimeSchema = PropertyValueBaseSchema.extend({
