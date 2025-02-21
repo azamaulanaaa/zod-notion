@@ -39,19 +39,27 @@ export const PropertyValueEmailSchema = PropertyValueBaseSchema.extend({
   email: z.string().email(),
 });
 
-export const PropertyValueFilesSchema = PropertyValueBaseSchema.extend({
+const PropertyValueFormulaBaseSchema = PropertyValueBaseSchema.extend({
   type: z.literal("files").optional().default("files"),
-  files: z.union([
-    FileNotionSchema.extend({
+});
+export const PropertyValueFilesNotionSchema = PropertyValueFormulaBaseSchema
+  .extend({
+    files: FileNotionSchema.extend({
       name: z.string(),
       type: FileNotionSchema.shape.type.optional().default("file"),
-    }),
-    FileExternalSchema.extend({
+    }).array(),
+  });
+export const PropertyValueFilesExternalSchema = PropertyValueFormulaBaseSchema
+  .extend({
+    files: FileExternalSchema.extend({
       name: z.string(),
       type: FileExternalSchema.shape.type.optional().default("external"),
-    }),
-  ]).array(),
-});
+    }).array(),
+  });
+export const PropertyValueFilesSchema = z.union([
+  PropertyValueFilesNotionSchema,
+  PropertyValueFilesExternalSchema,
+]);
 
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
   type: z.literal("title"),
