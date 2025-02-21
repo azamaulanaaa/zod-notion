@@ -18,6 +18,11 @@ export const PropertyValueCreatedBySchema = PropertyValueBaseSchema.extend({
   created_by: ObjectPartialUserSchema,
 });
 
+export const PropertyValueCreatedTimeSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("created_time").optional().default("created_time"),
+  created_time: z.coerce.date(),
+});
+
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
   type: z.literal("title"),
   title: RichTextSchema.array(),

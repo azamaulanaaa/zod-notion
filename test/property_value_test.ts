@@ -3,6 +3,7 @@ import { expect } from "@std/expect";
 import {
   PropertyValueCheckboxSchema,
   PropertyValueCreatedBySchema,
+  PropertyValueCreatedTimeSchema,
   PropertyValueDateSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
@@ -38,6 +39,22 @@ describe("PropertyValueCreatedBySchema", () => {
     ];
     const error =
       PropertyValueCreatedBySchema.array().safeParse(examples).error;
+    expect(error).toBeUndefined();
+  });
+});
+
+// NOTE: https://developers.notion.com/reference/page-property-values#created-time
+describe("PropertyValueCreatedTimeSchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "id": "eB_%7D",
+        "type": "created_time",
+        "created_time": "2022-10-24T22:54:00.000Z",
+      },
+    ];
+    const error =
+      PropertyValueCreatedTimeSchema.array().safeParse(examples).error;
     expect(error).toBeUndefined();
   });
 });
