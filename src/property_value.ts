@@ -4,6 +4,7 @@ import { RichTextSchema } from "@/rich_text.ts";
 import { ObjectPartialUserSchema } from "@/user.ts";
 import { FileNotionSchema } from "@/file.ts";
 import { FileExternalSchema } from "@/file.ts";
+import { EmojiBasicSchema, EmojiCustomSchema } from "@/emoji.ts";
 
 const PropertyValueBaseSchema = z.object({
   id: z.string().optional(),
@@ -97,6 +98,32 @@ export const PropertyValueFormulaSchema = z.union([
   PropertyValueFormulaDateSchema,
   PropertyValueFormulaNumberSchema,
   PropertyValueFormulaBooleanSchema,
+]);
+
+const PropertyValueIconBaseSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("icon").optional().default("icon"),
+});
+export const PropertyValueIconEmojiBasicSchema = PropertyValueIconBaseSchema
+  .extend({
+    icon: EmojiBasicSchema,
+  });
+export const PropertyValueIconEmojiCustomSchema = PropertyValueIconBaseSchema
+  .extend({
+    icon: EmojiCustomSchema,
+  });
+export const PropertyValueIconFileNotionSchema = PropertyValueIconBaseSchema
+  .extend({
+    icon: FileNotionSchema,
+  });
+export const PropertyValueIconFileExternalSchema = PropertyValueIconBaseSchema
+  .extend({
+    icon: FileExternalSchema,
+  });
+export const PropertyValueIconSchema = z.union([
+  PropertyValueIconEmojiBasicSchema,
+  PropertyValueIconEmojiCustomSchema,
+  PropertyValueIconFileNotionSchema,
+  PropertyValueIconFileExternalSchema,
 ]);
 
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({

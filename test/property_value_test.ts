@@ -8,6 +8,7 @@ import {
   PropertyValueEmailSchema,
   PropertyValueFilesSchema,
   PropertyValueFormulaSchema,
+  PropertyValueIconSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
 
@@ -153,6 +154,32 @@ describe("PropertyValueFormulaSchema", () => {
       },
     ];
     const error = PropertyValueFormulaSchema.array().safeParse(examples).error;
+    expect(error).toBeUndefined();
+  });
+});
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#icon
+describe("PropertyValueIconSchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "icon": {
+          "type": "emoji",
+          "emoji": "😀",
+        },
+      },
+      {
+        "icon": {
+          "type": "file",
+          "file": {
+            "url":
+              "https://local-files-secure.s3.us-west-2.amazonaws.com/13950b26-c203-4f3b-b97d-93ec06319565/a7084c4c-3e9a-4324-af99-34e0cb7f8fe7/notion.jpg?...",
+            "expiry_time": "2024-12-03T19:44:56.932Z",
+          },
+        },
+      },
+    ];
+    const error = PropertyValueIconSchema.array().safeParse(examples).error;
     expect(error).toBeUndefined();
   });
 });
