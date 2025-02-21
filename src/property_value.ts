@@ -23,15 +23,16 @@ export const PropertyValueCreatedTimeSchema = PropertyValueBaseSchema.extend({
   created_time: z.coerce.date(),
 });
 
-export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
-  type: z.literal("title"),
-  title: RichTextSchema.array(),
-});
-
-export const PropertyValueDateSchema = z.object({
+export const PropertyValueDateSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("date").optional().default("date"),
   date: z.object({
     start: z.coerce.date(),
     end: z.coerce.date().optional().nullable(),
     time_zone: TimeZoneSchema.optional().nullable(),
   }),
+});
+
+export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("title"),
+  title: RichTextSchema.array(),
 });
