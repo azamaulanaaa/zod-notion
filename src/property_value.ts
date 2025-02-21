@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { TimeZoneSchema } from "@/base.ts";
 import { RichTextSchema } from "@/rich_text.ts";
+import { ObjectPartialUserSchema } from "@/user.ts";
 
 const PropertyValueBaseSchema = z.object({
   id: z.string().optional(),
@@ -10,6 +11,11 @@ const PropertyValueBaseSchema = z.object({
 export const PropertyValueCheckboxSchema = PropertyValueBaseSchema.extend({
   type: z.literal("checkbox").optional().default("checkbox"),
   checkbox: z.boolean(),
+});
+
+export const PropertyValueCreatedBySchema = PropertyValueBaseSchema.extend({
+  type: z.literal("created_by").optional().default("created_by"),
+  created_by: ObjectPartialUserSchema,
 });
 
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({

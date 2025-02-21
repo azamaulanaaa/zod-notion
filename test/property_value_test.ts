@@ -2,6 +2,7 @@ import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import {
   PropertyValueCheckboxSchema,
+  PropertyValueCreatedBySchema,
   PropertyValueDateSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
@@ -20,6 +21,23 @@ describe("PropertyValueCheckboxSchema", () => {
       },
     ];
     const error = PropertyValueCheckboxSchema.array().safeParse(examples).error;
+    expect(error).toBeUndefined();
+  });
+});
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#created-by
+describe("PropertyValueCreatedBySchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "created_by": {
+          "object": "user",
+          "id": "c2f20311-9e54-4d11-8c79-7398424ae41e",
+        },
+      },
+    ];
+    const error =
+      PropertyValueCreatedBySchema.array().safeParse(examples).error;
     expect(error).toBeUndefined();
   });
 });
