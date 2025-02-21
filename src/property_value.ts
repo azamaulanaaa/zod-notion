@@ -1,5 +1,16 @@
 import { z } from "zod";
 import { TimeZoneSchema } from "@/base.ts";
+import { RichTextSchema } from "@/rich_text.ts";
+
+const PropertyValueBaseSchema = z.object({
+  id: z.string(),
+  type: z.string(),
+});
+
+export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("title"),
+  title: RichTextSchema.array(),
+});
 
 export const PropertyValueDateSchema = z.object({
   date: z.object({

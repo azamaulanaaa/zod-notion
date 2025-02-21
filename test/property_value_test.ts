@@ -1,6 +1,42 @@
 import { describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
-import { PropertyValueDateSchema } from "@/property_value.ts";
+import {
+  PropertyValueDateSchema,
+  PropertyValueTitleSchema,
+} from "@/property_value.ts";
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#title
+describe("PropertyValueTitleSchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "A better title for the page",
+              "link": null,
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default",
+            },
+            "plain_text": "This is also not done",
+            "href": null,
+          },
+        ],
+      },
+    ];
+    const error = PropertyValueTitleSchema.array().safeParse(examples).error;
+    expect(error).toBeUndefined();
+  });
+});
 
 describe("PropertyValueDateSchema", () => {
   it("no error on valid examples", () => {
