@@ -2,6 +2,8 @@ import { z } from "zod";
 import { TimeZoneSchema } from "@/base.ts";
 import { RichTextSchema } from "@/rich_text.ts";
 import { ObjectPartialUserSchema } from "@/user.ts";
+import { FileNotionSchema } from "@/file.ts";
+import { FileExternalSchema } from "@/file.ts";
 
 const PropertyValueBaseSchema = z.object({
   id: z.string().optional(),
@@ -35,6 +37,20 @@ export const PropertyValueDateSchema = PropertyValueBaseSchema.extend({
 export const PropertyValueEmailSchema = PropertyValueBaseSchema.extend({
   type: z.literal("email").optional().default("email"),
   email: z.string().email(),
+});
+
+export const PropertyValueFilesSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("files").optional().default("files"),
+  files: z.union([
+    FileNotionSchema.extend({
+      name: z.string(),
+      type: FileNotionSchema.shape.type.optional().default("file"),
+    }),
+    FileExternalSchema.extend({
+      name: z.string(),
+      type: FileExternalSchema.shape.type.optional().default("external"),
+    }),
+  ]).array(),
 });
 
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({

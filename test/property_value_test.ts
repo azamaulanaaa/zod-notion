@@ -6,6 +6,7 @@ import {
   PropertyValueCreatedTimeSchema,
   PropertyValueDateSchema,
   PropertyValueEmailSchema,
+  PropertyValueFilesSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
 
@@ -98,6 +99,41 @@ describe("PropertyValueEmailSchema", () => {
       },
     ];
     const error = PropertyValueEmailSchema.array().safeParse(examples).error;
+    expect(error).toBeUndefined();
+  });
+});
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#files
+describe("PjopertyValueFilesSchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "files": [
+          {
+            "name": "Project Alpha blueprint",
+            "external": {
+              "url":
+                "https://www.figma.com/file/g7eazMtXnqON4i280CcMhk/project-alpha-blueprint?node-id=0%3A1&t=nXseWIETQIgv31YH-1",
+            },
+          },
+        ],
+      },
+      {
+        "id": "tJPS",
+        "type": "files",
+        "files": [
+          {
+            "name": "Project blueprint",
+            "type": "external",
+            "external": {
+              "url":
+                "https://www.figma.com/file/g7eazMtXnqON4i280CcMhk/project-alpha-blueprint?node-id=0%3A1&t=nXseWIETQIgv31YH-1",
+            },
+          },
+        ],
+      },
+    ];
+    const error = PropertyValueFilesSchema.array().safeParse(examples).error;
     expect(error).toBeUndefined();
   });
 });
