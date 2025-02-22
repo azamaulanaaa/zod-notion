@@ -207,6 +207,11 @@ export const PropertyValueNumberSchema = z.union([
   PropertyValueNumberFormatSchema,
 ]);
 
+export const PropertyValuePeopleSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("people").optional().default("people"),
+  people: z.object({}),
+});
+
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
   type: z.literal("title"),
   title: RichTextSchema.array(),

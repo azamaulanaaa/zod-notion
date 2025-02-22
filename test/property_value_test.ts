@@ -13,6 +13,7 @@ import {
   PropertyValueLastEditedTimeSchema,
   PropertyValueMultiSelectSchema,
   PropertyValueNumberSchema,
+  PropertyValuePeopleSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
 
@@ -283,6 +284,22 @@ describe("PropertyValueNumberSchema", () => {
       },
     ];
     const error = PropertyValueNumberSchema.array().safeParse(examples).error;
+    expect(error).toBeUndefined();
+  });
+});
+
+// NOTE: Reference https://developers.notion.com/reference/property-object#people
+describe("PropertyValuePeopleSchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "id": "FlgQ",
+        "name": "Project owner",
+        "type": "people",
+        "people": {},
+      },
+    ];
+    const error = PropertyValuePeopleSchema.array().safeParse(examples).error;
     expect(error).toBeUndefined();
   });
 });
