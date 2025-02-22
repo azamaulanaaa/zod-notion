@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TimeZoneSchema } from "@/base.ts";
+import { ColorSchema, TimeZoneSchema } from "@/base.ts";
 import { RichTextSchema } from "@/rich_text.ts";
 import { ObjectUserSchema } from "@/user.ts";
 import { FileNotionSchema } from "@/file.ts";
@@ -137,6 +137,15 @@ export const PropertyValueLastEditedTimeSchema = PropertyValueBaseSchema.extend(
     last_edited_time: z.coerce.date(),
   },
 );
+
+export const PropertyValueMultiSelectSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("multi_select").optional().default("multi_select"),
+  multi_select: z.object({
+    id: z.string().optional(),
+    name: z.string().regex(RegExp("^[^,]*$"), "Commas are prohibited"),
+    color: ColorSchema.optional(),
+  }).array(),
+});
 
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
   type: z.literal("title"),

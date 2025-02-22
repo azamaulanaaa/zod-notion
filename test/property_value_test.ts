@@ -11,6 +11,7 @@ import {
   PropertyValueIconSchema,
   PropertyValueLastEditedBySchema,
   PropertyValueLastEditedTimeSchema,
+  PropertyValueMultiSelectSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
 
@@ -219,6 +220,47 @@ describe("PropertyValueLastEditedTimeSchema", () => {
   }];
   const error =
     PropertyValueLastEditedTimeSchema.array().safeParse(examples).error;
+  expect(error).toBeUndefined();
+});
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#multi-select
+describe("PropertyValueMultiSelectSchema", () => {
+  const examples = [
+    {
+      "multi_select": [
+        {
+          "name": "TypeScript",
+        },
+        {
+          "name": "Python",
+        },
+      ],
+    },
+    {
+      "id": "QyRn",
+      "name": "Programming language",
+      "type": "multi_select",
+      "multi_select": [
+        {
+          "id": "tC;=",
+          "name": "TypeScript",
+          "color": "purple",
+        },
+        {
+          "id": "e4413a91-9f84-4c4a-a13d-5b4b3ef870bb",
+          "name": "JavaScript",
+          "color": "red",
+        },
+        {
+          "id": "fc44b090-2166-40c8-8c58-88f2d8085ec0",
+          "name": "Python",
+          "color": "gray",
+        },
+      ],
+    },
+  ];
+  const error =
+    PropertyValueMultiSelectSchema.array().safeParse(examples).error;
   expect(error).toBeUndefined();
 });
 
