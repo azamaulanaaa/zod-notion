@@ -147,6 +147,66 @@ export const PropertyValueMultiSelectSchema = PropertyValueBaseSchema.extend({
   }).array(),
 });
 
+const PropertyValueNumberBaseSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("number").optional().default("number"),
+});
+export const PropertyValueNumberNumberSchema = PropertyValueNumberBaseSchema
+  .extend({
+    number: z.number(),
+  });
+export const PropertyValueNumberFormatSchema = PropertyValueNumberBaseSchema
+  .extend({
+    number: z.object({
+      format: z.enum([
+        "argentine_peso",
+        "baht",
+        "australian_dollar",
+        "canadian_dollar",
+        "chilean_peso",
+        "colombian_peso",
+        "danish_krone",
+        "dirham",
+        "dollar",
+        "euro",
+        "forint",
+        "franc",
+        "hong_kong_dollar",
+        "koruna",
+        "krona",
+        "leu",
+        "lira",
+        "mexican_peso",
+        "new_taiwan_dollar",
+        "new_zealand_dollar",
+        "norwegian_krone",
+        "number",
+        "number_with_commas",
+        "percent",
+        "philippine_peso",
+        "pound",
+        "peruvian_sol",
+        "rand",
+        "real",
+        "ringgit",
+        "riyal",
+        "ruble",
+        "rupee",
+        "rupiah",
+        "shekel",
+        "singapore_dollar",
+        "uruguayan_peso",
+        "yen,",
+        "yuan",
+        "won",
+        "zloty",
+      ]),
+    }),
+  });
+export const PropertyValueNumberSchema = z.union([
+  PropertyValueNumberNumberSchema,
+  PropertyValueNumberFormatSchema,
+]);
+
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
   type: z.literal("title"),
   title: RichTextSchema.array(),

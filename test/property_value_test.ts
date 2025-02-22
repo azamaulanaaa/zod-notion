@@ -12,6 +12,7 @@ import {
   PropertyValueLastEditedBySchema,
   PropertyValueLastEditedTimeSchema,
   PropertyValueMultiSelectSchema,
+  PropertyValueNumberSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
 
@@ -262,6 +263,28 @@ describe("PropertyValueMultiSelectSchema", () => {
   const error =
     PropertyValueMultiSelectSchema.array().safeParse(examples).error;
   expect(error).toBeUndefined();
+});
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#number
+// NOTE: docs does not examplain how to handle number format
+describe("PropertyValueNumberSchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "number": 42,
+      },
+      {
+        "id": "WPj%5E",
+        "name": "Number of subscribers",
+        "type": "number",
+        "number": {
+          "format": "number",
+        },
+      },
+    ];
+    const error = PropertyValueNumberSchema.array().safeParse(examples).error;
+    expect(error).toBeUndefined();
+  });
 });
 
 // NOTE: Reference https://developers.notion.com/reference/page-property-values#title
