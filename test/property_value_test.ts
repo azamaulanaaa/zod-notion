@@ -288,15 +288,31 @@ describe("PropertyValueNumberSchema", () => {
   });
 });
 
-// NOTE: Reference https://developers.notion.com/reference/property-object#people
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#people
 describe("PropertyValuePeopleSchema", () => {
   it("no error on valid examples", () => {
     const examples = [
       {
-        "id": "FlgQ",
-        "name": "Project owner",
+        "people": [{
+          "object": "user",
+          "id": "c2f20311-9e54-4d11-8c79-7398424ae41e",
+        }],
+      },
+      {
+        "id": "%7BLUX",
         "type": "people",
-        "people": {},
+        "people": [
+          {
+            "object": "user",
+            "id": "c2f20311-9e54-4d11-8c79-7398424ae41e",
+            "name": "Kimberlee Johnson",
+            "avatar_url": null,
+            "type": "person",
+            "person": {
+              "email": "hello@kimberlee.dev",
+            },
+          },
+        ],
       },
     ];
     const error = PropertyValuePeopleSchema.array().safeParse(examples).error;

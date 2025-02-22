@@ -209,7 +209,7 @@ export const PropertyValueNumberSchema = z.union([
 
 export const PropertyValuePeopleSchema = PropertyValueBaseSchema.extend({
   type: z.literal("people").optional().default("people"),
-  people: z.object({}),
+  people: ObjectUserSchema.array(),
 });
 
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
