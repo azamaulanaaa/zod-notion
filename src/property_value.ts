@@ -131,6 +131,13 @@ export const PropertyValueLastEditedBySchema = PropertyValueBaseSchema.extend({
   last_edited_by: ObjectUserSchema,
 });
 
+export const PropertyValueLastEditedTimeSchema = PropertyValueBaseSchema.extend(
+  {
+    type: z.literal("last_edited_time").optional().default("last_edited_time"),
+    last_edited_time: z.coerce.date(),
+  },
+);
+
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
   type: z.literal("title"),
   title: RichTextSchema.array(),

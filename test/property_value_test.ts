@@ -10,6 +10,7 @@ import {
   PropertyValueFormulaSchema,
   PropertyValueIconSchema,
   PropertyValueLastEditedBySchema,
+  PropertyValueLastEditedTimeSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
 
@@ -207,6 +208,18 @@ describe("PropertyValueLastEditedBySchema", () => {
       PropertyValueLastEditedBySchema.array().safeParse(examples).error;
     expect(error).toBeUndefined();
   });
+});
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#last-edited-time
+describe("PropertyValueLastEditedTimeSchema", () => {
+  const examples = [{
+    "id": "%3Defk",
+    "type": "last_edited_time",
+    "last_edited_time": "2023-02-24T21:06:00.000Z",
+  }];
+  const error =
+    PropertyValueLastEditedTimeSchema.array().safeParse(examples).error;
+  expect(error).toBeUndefined();
 });
 
 // NOTE: Reference https://developers.notion.com/reference/page-property-values#title
