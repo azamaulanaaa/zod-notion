@@ -126,6 +126,11 @@ export const PropertyValueIconSchema = z.union([
   PropertyValueIconFileExternalSchema,
 ]);
 
+export const PropertyValueLastEditedBySchema = PropertyValueBaseSchema.extend({
+  type: z.literal("last_edited_by").optional().default("last_edited_by"),
+  last_edited_by: ObjectUserSchema,
+});
+
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
   type: z.literal("title"),
   title: RichTextSchema.array(),

@@ -9,6 +9,7 @@ import {
   PropertyValueFilesSchema,
   PropertyValueFormulaSchema,
   PropertyValueIconSchema,
+  PropertyValueLastEditedBySchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
 
@@ -180,6 +181,30 @@ describe("PropertyValueIconSchema", () => {
       },
     ];
     const error = PropertyValueIconSchema.array().safeParse(examples).error;
+    expect(error).toBeUndefined();
+  });
+});
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#last-edited-by
+describe("PropertyValueLastEditedBySchema", () => {
+  it("no error on valid examples", () => {
+    const examples = [
+      {
+        "id": "uGNN",
+        "type": "last_edited_by",
+        "last_edited_by": {
+          "object": "user",
+          "id": "9188c6a5-7381-452f-b3dc-d4865aa89bdf",
+          "name": "Test Integration",
+          "avatar_url":
+            "https://s3-us-west-2.amazonaws.com/public.notion-static.com/3db373fe-18f6-4a3c-a536-0f061cb9627f/leplane.jpeg",
+          "type": "bot",
+          "bot": {},
+        },
+      },
+    ];
+    const error =
+      PropertyValueLastEditedBySchema.array().safeParse(examples).error;
     expect(error).toBeUndefined();
   });
 });
