@@ -14,6 +14,7 @@ import {
   PropertyValueMultiSelectSchema,
   PropertyValueNumberSchema,
   PropertyValuePeopleSchema,
+  PropertyValuePhoneNumberSchema,
   PropertyValueTitleSchema,
 } from "@/property_value.ts";
 
@@ -318,6 +319,25 @@ describe("PropertyValuePeopleSchema", () => {
     const error = PropertyValuePeopleSchema.array().safeParse(examples).error;
     expect(error).toBeUndefined();
   });
+});
+
+// NOTE: Reference https://developers.notion.com/reference/page-property-values#phone-number
+// NOTE: example given by the docs is error, so require some adjustment
+describe("PropertyValuePhoneNumberSchema", () => {
+  const examples = [
+    {
+      "phone_number": "415-202-4776",
+    },
+    {
+      "id": "%5DKhQ",
+      "name": "Example phone number property",
+      "type": "phone_number",
+      "phone_number": "415-202-4776",
+    },
+  ];
+  const error =
+    PropertyValuePhoneNumberSchema.array().safeParse(examples).error;
+  expect(error).toBeUndefined();
 });
 
 // NOTE: Reference https://developers.notion.com/reference/page-property-values#title

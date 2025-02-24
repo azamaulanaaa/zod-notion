@@ -212,6 +212,11 @@ export const PropertyValuePeopleSchema = PropertyValueBaseSchema.extend({
   people: ObjectUserSchema.array(),
 });
 
+export const PropertyValuePhoneNumberSchema = PropertyValueBaseSchema.extend({
+  type: z.literal("phone_number").optional().default("phone_number"),
+  phone_number: z.string(),
+});
+
 export const PropertyValueTitleSchema = PropertyValueBaseSchema.extend({
   type: z.literal("title"),
   title: RichTextSchema.array(),
